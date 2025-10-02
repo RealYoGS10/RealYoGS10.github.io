@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <title>Galaxy Chat</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1a0033, #000);
+      color: white;
+      font-family: Arial;
+      margin: 0; padding: 0;
+    }
+    .container { max-width: 600px; margin: auto; padding: 20px; }
+    h1 { text-align: center; color: #b19cd9; }
+    input, button {
+      padding: 10px; margin: 5px 0; width: 100%;
+      border-radius: 8px; border: none;
+    }
+    #chatBox { height: 300px; overflow-y: auto; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; }
+    .msg { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌌 Galaxy Global Chat</h1>
+    <div id="login">
+      <input id="name" placeholder="Your Name">
+      <input id="form" placeholder="Your Form">
+      <button onclick="enterChat()">Enter</button>
+    </div>
+    <div id="chat" style="display:none">
+      <div id="chatBox"></div>
+      <input id="msgInput" placeholder="Type a message...">
+      <button onclick="sendMsg()">Send</button>
+    </div>
+  </div>
+<script>
+let user = {};
+function enterChat(){
+  user.name = document.getElementById('name').value;
+  user.form = document.getElementById('form').value;
+  if(!user.name || !user.form){ alert("Enter both!"); return; }
+  document.getElementById('login').style.display="none";
+  document.getElementById('chat').style.display="block";
+}
+function sendMsg(){
+  let msg = document.getElementById('msgInput').value;
+  if(!msg) return;
+  let box = document.getElementById('chatBox');
+  let div = document.createElement('div');
+  div.className="msg";
+  div.textContent = user.name+" ("+user.form+"): "+msg;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  document.getElementById('msgInput').value="";
+}
+</script>
+</body>
+</html>
